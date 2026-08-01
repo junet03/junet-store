@@ -32,7 +32,6 @@ Sites version, and append exact evidence to the project journal.
 - Explicit approval of the private Sites version.
 - DNS/Cloudflare configuration export and rollback target.
 - TLS and redirect proof for apex and `www` before HSTS.
-- A final private preview smoke pass against the security-hardened commit.
 
 ## Rollback
 
