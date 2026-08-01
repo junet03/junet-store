@@ -11,6 +11,11 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "dist/**",
+    "graphify-out/**",
+    "output/**",
+    ".playwright-cli/**",
+    ".gitnexus/**",
     "next-env.d.ts",
   ]),
 ]);
