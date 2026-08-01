@@ -2,9 +2,10 @@
 
 ## Current checkpoint
 
-Feature `001-junet-store-foundation` is implemented locally. Production is not
-authorized. The next allowed external release step is a private Sites preview of
-an exact green commit, followed by explicit maintainer approval.
+Feature `001-junet-store-foundation` is implemented on a protected feature
+branch with a draft pull request and green remote gates. Production is not
+authorized. The next allowed release step is approval of the final private
+Sites candidate, followed by an explicit maintainer decision.
 
 ## Runtime
 
@@ -19,7 +20,7 @@ an exact green commit, followed by explicit maintainer approval.
 ```powershell
 npm ci
 npm run check
-npm run audit:prod
+npm run audit:security
 ```
 
 Then refresh Graphify, index/query GitNexus, run the Chromium/WebKit viewport
@@ -31,7 +32,7 @@ Sites version, and append exact evidence to the project journal.
 - Explicit approval of the private Sites version.
 - DNS/Cloudflare configuration export and rollback target.
 - TLS and redirect proof for apex and `www` before HSTS.
-- Protected `main` with required Quality, CodeQL, and dependency checks.
+- A final private preview smoke pass against the security-hardened commit.
 
 ## Rollback
 

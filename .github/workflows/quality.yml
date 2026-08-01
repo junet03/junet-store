@@ -34,5 +34,5 @@ jobs:
         run: npm ci
       - name: Validate source, content, build, and rendered output
         run: npm run check
-      - name: Audit production dependencies
-        run: npm run audit:prod
+      - name: Audit the complete dependency graph
+        run: npm run audit:security

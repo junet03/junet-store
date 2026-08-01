@@ -87,7 +87,7 @@
 - [X] T036 Run the documented Lighthouse mobile audit and record measured results in the project journal
 - [X] T037 Build and health-check the directed deep Graphify graph; retain reviewed primary outputs in graphify-out/
 - [X] T038 Index the canonical repository with GitNexus, run scoped impact/change detection, and journal the summary
-- [ ] T039 Create and push the public junet03/junet-store repository, configure protected main checks, and preserve the clean intended history
+- [X] T039 Create and push the public junet03/junet-store repository, configure protected main checks, and preserve the clean intended history
 - [ ] T040 Save and privately deploy the exact validated Sites version, run preview smoke checks, and record rollback data
 - [ ] T041 After explicit approval, publish the saved version, cut over junet.store, apply available Cloudflare protections, and record production smoke/rollback evidence
 

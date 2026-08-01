@@ -4,7 +4,7 @@
 
 1. Confirm the feature spec and ADRs are accepted.
 2. Stop any Wrangler preview holding `dist/server/.wrangler`, then run `npm ci`,
-   `npm run check`, and `npm run audit:prod` from a clean worktree.
+   `npm run check`, and `npm run audit:security` from a clean worktree.
 3. Record the exact commit SHA; do not rebuild from an uncommitted tree.
 4. Refresh Graphify and GitNexus evidence and resolve unexplained impact.
 5. Package/save a Sites version from that exact SHA and deploy it privately.
