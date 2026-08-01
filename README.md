@@ -21,7 +21,7 @@ Open `http://localhost:3000`. Run the full validation gate with:
 
 ```powershell
 npm run check
-npm run audit:prod
+npm run audit:security
 ```
 
 The site has no CMS, database, forms, accounts, analytics, advertising, or
