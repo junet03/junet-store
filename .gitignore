@@ -46,6 +46,8 @@ next-env.d.ts
 /.gitnexus/
 /graphify-out/.graphify*
 /graphify-out/cost.json
+/graphify-out/cache/
+/graphify-out/manifest.json
 /graphify-out/obsidian/
 *.secret
 *.token
