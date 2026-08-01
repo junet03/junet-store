@@ -36,7 +36,16 @@ yarn-error.log*
 
 # typescript
 next-env.d.ts
+*.tsbuildinfo
 /dist/
 /.wrangler/
 /outputs/
 /work/
+/output/
+/.playwright-cli/
+/.gitnexus/
+/graphify-out/.graphify*
+/graphify-out/cost.json
+/graphify-out/obsidian/
+*.secret
+*.token
