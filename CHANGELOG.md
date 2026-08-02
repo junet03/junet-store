@@ -5,6 +5,10 @@ specs and append-only operational journal entries.
 
 ## [Unreleased]
 
+No unreleased changes.
+
+## [1.0.0] - 2026-08-02
+
 ### Added
 
 - Bilingual Vietnamese/English mobile-first knowledge site with stable route IDs.
@@ -21,5 +25,10 @@ specs and append-only operational journal entries.
 
 - Production dependency overrides pin patched PostCSS and Sharp releases while
   preserving the validated Vinext/Next build.
-- HSTS is intentionally deferred until apex and `www` TLS/canonical behavior is
-  proven at production cutover.
+- Production responses send HSTS after apex and `www` TLS/canonical behavior
+  passed live cutover proof.
+- Source-owned `/edge-assets/` and `/edge-media/` delivery provides immutable
+  hashed-asset caching, correct WebP MIME, and bounded public-media access even
+  when Sites serves physical static files before the Worker.
+- Cloudflare automatic DDoS protection remains active. No false-positive-prone
+  Block rate rule was substituted for unavailable Managed Challenge behavior.
