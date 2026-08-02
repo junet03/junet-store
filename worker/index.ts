@@ -24,6 +24,8 @@ const HSTS = "max-age=2592000";
 const PUBLIC_HTML_CACHE = "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400";
 const IMMUTABLE_ASSET_CACHE = "public, max-age=31536000, immutable";
 const BRAND_ASSET_CACHE = "public, max-age=86400, stale-while-revalidate=604800";
+const EDGE_ASSET_PREFIX = "/edge-assets/";
+const EDGE_MEDIA_PREFIX = "/edge-media/";
 const PUBLIC_ASSET_PATHS = new Set([
   "/favicon.svg",
   "/mql5-codegraph-hero.png",
@@ -41,6 +43,31 @@ function isStaticAsset(pathname: string): boolean {
   );
 }
 
+function assetBindingRequest(request: Request, pathname: string): Request {
+  const url = new URL(request.url);
+  url.pathname = pathname;
+  return new Request(url, request);
+}
+
+async function rewriteAssetPaths(response: Response): Promise<Response> {
+  const contentType = response.headers.get("Content-Type") ?? "";
+  if (!/(?:text\/html|text\/css|javascript|application\/json|text\/x-component)/i.test(contentType)) {
+    return response;
+  }
+
+  const headers = new Headers(response.headers);
+  headers.delete("Content-Length");
+  headers.delete("Content-Encoding");
+  headers.delete("ETag");
+  const body = (await response.text()).replaceAll("/assets/", EDGE_ASSET_PREFIX);
+
+  return new Response(body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 function withProductionHeaders(request: Request, response: Response): Response {
   const { pathname } = new URL(request.url);
   const headers = new Headers(response.headers);
@@ -51,17 +78,22 @@ function withProductionHeaders(request: Request, response: Response): Response {
     headers.set("Cache-Control", PUBLIC_HTML_CACHE);
   } else if (
     response.status === 200 &&
-    (pathname.startsWith("/assets/") || pathname.startsWith("/_next/static/"))
+    (
+      pathname.startsWith("/assets/") ||
+      pathname.startsWith("/_next/static/") ||
+      pathname.startsWith(EDGE_ASSET_PREFIX)
+    )
   ) {
     headers.set("Cache-Control", IMMUTABLE_ASSET_CACHE);
   } else if (
     response.status === 200 &&
-    [
-      "/mql5-codegraph-hero.webp",
-      "/og-1200x630.webp",
-      "/mql5-codegraph-hero.png",
-      "/og.png",
-    ].includes(pathname)
+    (pathname.startsWith(EDGE_MEDIA_PREFIX) ||
+      [
+        "/mql5-codegraph-hero.webp",
+        "/og-1200x630.webp",
+        "/mql5-codegraph-hero.png",
+        "/og.png",
+      ].includes(pathname))
   ) {
     headers.set("Cache-Control", BRAND_ASSET_CACHE);
   }
@@ -101,12 +133,33 @@ const worker = {
       return withProductionHeaders(request, response);
     }
 
+    if (url.pathname.startsWith(EDGE_ASSET_PREFIX)) {
+      const relativePath = url.pathname.slice(EDGE_ASSET_PREFIX.length);
+      if (!relativePath || relativePath.includes("..")) {
+        return withProductionHeaders(request, new Response("Not found", { status: 404 }));
+      }
+      const response = await env.ASSETS.fetch(
+        assetBindingRequest(request, `/assets/${relativePath}`),
+      );
+      return withProductionHeaders(request, await rewriteAssetPaths(response));
+    }
+
+    if (url.pathname.startsWith(EDGE_MEDIA_PREFIX)) {
+      const filename = url.pathname.slice(EDGE_MEDIA_PREFIX.length);
+      const publicPath = `/${filename}`;
+      if (!PUBLIC_ASSET_PATHS.has(publicPath)) {
+        return withProductionHeaders(request, new Response("Not found", { status: 404 }));
+      }
+      const response = await env.ASSETS.fetch(assetBindingRequest(request, publicPath));
+      return withProductionHeaders(request, response);
+    }
+
     if (isStaticAsset(url.pathname)) {
       return withProductionHeaders(request, await env.ASSETS.fetch(request));
     }
 
     const response = await handler.fetch(request, env, ctx);
-    return withProductionHeaders(request, response);
+    return withProductionHeaders(request, await rewriteAssetPaths(response));
   },
 };
 
