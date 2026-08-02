@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const publicPaths = [
@@ -22,7 +23,23 @@ const publicPaths = [
 
 const workerUrl = new URL(`../dist/server/index.js?test=${process.pid}-${Date.now()}`, import.meta.url);
 const { default: worker } = await import(workerUrl.href);
-const env = { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } };
+const env = {
+  ASSETS: {
+    fetch: async (assetRequest) => {
+      const pathname = new URL(assetRequest.url).pathname;
+      if (pathname === "/mql5-codegraph-hero.webp") {
+        return new Response("webp", {
+          status: 200,
+          headers: { "Content-Type": "application/octet-stream" },
+        });
+      }
+      if (pathname.startsWith("/assets/")) {
+        return new Response("asset", { status: 200 });
+      }
+      return new Response("Not found", { status: 404 });
+    },
+  },
+};
 const ctx = { waitUntil() {}, passThroughOnException() {} };
 
 function request(path, headers = {}) {
@@ -103,6 +120,27 @@ test("applies strict response and cache policy after production TLS activation",
     "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
   );
   assert.equal(response.headers.get("x-powered-by"), null);
+});
+
+test("routes static assets through the response policy", async () => {
+  const config = JSON.parse(
+    await readFile(new URL("../dist/server/wrangler.json", import.meta.url), "utf8"),
+  );
+  assert.equal(config.assets.binding, "ASSETS");
+  assert.equal(config.assets.run_worker_first, true);
+
+  const image = await request("/mql5-codegraph-hero.webp", { accept: "image/webp" });
+  assert.equal(image.status, 200);
+  assert.equal(image.headers.get("content-type"), "image/webp");
+  assert.equal(
+    image.headers.get("cache-control"),
+    "public, max-age=86400, stale-while-revalidate=604800",
+  );
+  assert.equal(image.headers.get("strict-transport-security"), "max-age=2592000");
+
+  const asset = await request("/assets/example-hash.js", { accept: "text/javascript" });
+  assert.equal(asset.status, 200);
+  assert.equal(asset.headers.get("cache-control"), "public, max-age=31536000, immutable");
 });
 
 test("serves sitemap and robots for all public routes", async () => {

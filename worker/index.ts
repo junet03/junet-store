@@ -24,6 +24,22 @@ const HSTS = "max-age=2592000";
 const PUBLIC_HTML_CACHE = "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400";
 const IMMUTABLE_ASSET_CACHE = "public, max-age=31536000, immutable";
 const BRAND_ASSET_CACHE = "public, max-age=86400, stale-while-revalidate=604800";
+const PUBLIC_ASSET_PATHS = new Set([
+  "/favicon.svg",
+  "/mql5-codegraph-hero.png",
+  "/mql5-codegraph-hero.webp",
+  "/og-1200x630.webp",
+  "/og.png",
+  "/theme-init.js",
+]);
+
+function isStaticAsset(pathname: string): boolean {
+  return (
+    pathname.startsWith("/assets/") ||
+    pathname.startsWith("/_next/static/") ||
+    PUBLIC_ASSET_PATHS.has(pathname)
+  );
+}
 
 function withProductionHeaders(request: Request, response: Response): Response {
   const { pathname } = new URL(request.url);
@@ -83,6 +99,10 @@ const worker = {
         },
       }, allowedWidths);
       return withProductionHeaders(request, response);
+    }
+
+    if (isStaticAsset(url.pathname)) {
+      return withProductionHeaders(request, await env.ASSETS.fetch(request));
     }
 
     const response = await handler.fetch(request, env, ctx);
