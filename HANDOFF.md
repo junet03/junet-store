@@ -48,6 +48,11 @@ project journal.
   policy remain versioned in source.
 - HSTS uses a 30-day max-age without `includeSubDomains` or preload during the
   initial observation period.
+- Final hosted Lighthouse is Performance 93, Accessibility 100, Best Practices
+  81, and SEO 100; LCP 1,704 ms and CLS 0 pass. Sites injects a Cloudflare
+  challenge script after the Worker on both its direct and custom hostnames;
+  its deprecated APIs cause the Best Practices loss and contribute to a 6.3 s
+  Speed Index. This is a recorded platform exception, not a claimed 95+ pass.
 
 ## Next checkpoint
 
