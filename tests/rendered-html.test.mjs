@@ -129,7 +129,12 @@ test("routes static assets through the response policy", async () => {
   assert.equal(config.assets.binding, "ASSETS");
   assert.equal(config.assets.run_worker_first, true);
 
-  const image = await request("/mql5-codegraph-hero.webp", { accept: "image/webp" });
+  const homepage = await request("/vi");
+  const homepageHtml = await homepage.text();
+  assert.match(homepageHtml, /\/edge-assets\//);
+  assert.doesNotMatch(homepageHtml, /["']\/assets\//);
+
+  const image = await request("/edge-media/mql5-codegraph-hero.webp", { accept: "image/webp" });
   assert.equal(image.status, 200);
   assert.equal(image.headers.get("content-type"), "image/webp");
   assert.equal(
@@ -138,7 +143,7 @@ test("routes static assets through the response policy", async () => {
   );
   assert.equal(image.headers.get("strict-transport-security"), "max-age=2592000");
 
-  const asset = await request("/assets/example-hash.js", { accept: "text/javascript" });
+  const asset = await request("/edge-assets/example-hash.js", { accept: "text/javascript" });
   assert.equal(asset.status, 200);
   assert.equal(asset.headers.get("cache-control"), "public, max-age=31536000, immutable");
 });

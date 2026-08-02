@@ -38,13 +38,13 @@ export function localizedMetadata({
       url: canonical,
       locale: locale === "vi" ? "vi_VN" : "en_US",
       alternateLocale: locale === "vi" ? ["en_US"] : ["vi_VN"],
-      images: [{ url: "/og-1200x630.webp", width: 1200, height: 630, alt: `${SITE_NAME} — AI × MQL5 × Open Source` }],
+      images: [{ url: "/edge-media/og-1200x630.webp", width: 1200, height: 630, alt: `${SITE_NAME} — AI × MQL5 × Open Source` }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/og-1200x630.webp"],
+      images: ["/edge-media/og-1200x630.webp"],
     },
   };
 }

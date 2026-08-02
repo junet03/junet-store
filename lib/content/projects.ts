@@ -41,7 +41,7 @@ export const MQL5_CODEGRAPH: Project = {
   license: "MIT",
   release: "v0.3.0",
   python: "3.11+",
-  image: "/mql5-codegraph-hero.webp",
+  image: "/edge-media/mql5-codegraph-hero.webp",
   links: PROJECT_LINKS,
   localized: {
     vi: {
