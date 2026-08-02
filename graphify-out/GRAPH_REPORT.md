@@ -1,28 +1,20 @@
 # Graph Report - F:\Dev\Projects\junet-store  (2026-08-02)
 
 ## Corpus Check
-- 114 files · ~119,326 words
+- 114 files · ~119,487 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 498 nodes · 710 edges · 30 communities (27 shown, 3 thin omitted)
+- 500 nodes · 712 edges · 22 communities (19 shown, 3 thin omitted)
 - Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 83 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
 - Spec Kit PowerShell Core
 - Feature Branch Automation
-- Localized Page Dispatcher
-- Locale Layout and 404
-- SEO and Security Headers
-- Theme and Locale UI
-- Localized Page Components
-- Safe Markdown Rendering
-- Project Footer Metadata
+- Localized Application UI
+- Content Routes and Tests
 - ESLint Quality Policy
-- Article Content Loader
-- Content and Render Tests
-- Route Identity Contracts
 - Runtime Package Manifest
 - Toolchain Dependencies
 - Markdown Raw Imports
@@ -31,11 +23,11 @@
 - MQL5 Evidence and Release
 - Architecture Security Decisions
 - Foundation Design Decisions
-- Release Security Operations
-- Foundation Release Architecture
+- Release Evidence and Intelligence
+- Foundation Security Release
 - Project Metadata Type
 - Sites Vite Configuration
-- Worker Asset Policy
+- Worker Dynamic Assets
 
 ## God Nodes (most connected - your core abstractions)
 1. `Junet.store Constitution` - 16 edges
@@ -87,73 +79,41 @@
 - **Controlled release evidence flow** — docs_decisions_0004_sites_controlled_delivery_exact_green_commit, docs_runbooks_deploy_rollback_exact_sha_private_candidate, specs_001_junet_store_foundation_contracts_release_evidence_production_eligibility_record, specs_001_junet_store_foundation_data_model_release_evidence_lifecycle, specs_001_junet_store_foundation_tasks_production_edge_cutover [INFERRED 0.85]
 - **Production edge security activation** — docs_decisions_0005_static_edge_security_static_first_edge_security, docs_decisions_0006_production_edge_activation_production_edge_activation, docs_runbooks_ddos_incident_ddos_incident_response, docs_runbooks_dns_cutover_dns_cutover_workflow [INFERRED 0.85]
 
-## Communities (30 total, 3 thin omitted)
+## Communities (22 total, 3 thin omitted)
 
-### Community 13 - "Spec Kit PowerShell Core"
+### Community 12 - "Spec Kit PowerShell Core"
 Cohesion: 0.22
 Nodes (10): Find-SpecifyRoot(), Resolve-SpecifyInitDir(), Get-RepoRoot(), Get-CurrentBranch(), Save-FeatureJson(), Get-FeaturePathsEnv(), Get-InvokeSeparator(), Format-SpecKitCommand() (+2 more)
 
-### Community 16 - "Localized Page Dispatcher"
-Cohesion: 0.26
-Nodes (11): PageParams, pageText(), generateMetadata(), LocalizedPage(), AboutView(), ARTICLES, getArticles(), getArticle() (+3 more)
+### Community 0 - "Localized Application UI"
+Cohesion: 0.06
+Nodes (55): PageParams, generateStaticParams(), pageText(), generateMetadata(), LocalizedPage(), metadata, LocaleLayout(), LocalizedNotFound() (+47 more)
 
-### Community 12 - "Locale Layout and 404"
-Cohesion: 0.20
-Nodes (10): generateStaticParams(), metadata, LocaleLayout(), LocalizedNotFound(), NotFoundView(), LOCALES, isLocale(), globals (+2 more)
+### Community 1 - "Content Routes and Tests"
+Cohesion: 0.07
+Nodes (40): sitemap(), ArticleFrontMatter, sources, parseArticle(), ARTICLES, ArticleForValidation, assertSafeMarkdown(), assertArticleParity() (+32 more)
 
-### Community 18 - "SEO and Security Headers"
-Cohesion: 0.27
-Nodes (5): sitemap(), securityHeaders, nextConfig, seo site url, next
-
-### Community 14 - "Theme and Locale UI"
-Cohesion: 0.31
-Nodes (8): GET(), Theme, currentTheme(), subscribe(), ThemeToggle(), Locale, pickLocale(), react
-
-### Community 8 - "Localized Page Components"
-Cohesion: 0.16
-Nodes (15): ArticleCard(), CopyCode(), HomeView(), ProjectView(), ArticlesView(), ArticleView(), ProjectsView(), CommunityView() (+7 more)
-
-### Community 21 - "Safe Markdown Rendering"
-Cohesion: 0.50
-Nodes (4): safeHref(), MarkdownArticle(), react markdown, remark gfm
-
-### Community 20 - "Project Footer Metadata"
-Cohesion: 0.40
-Nodes (4): SiteFooter(), PROJECT_LINKS, Project, MQL5_CODEGRAPH
-
-### Community 22 - "ESLint Quality Policy"
+### Community 14 - "ESLint Quality Policy"
 Cohesion: 0.40
 Nodes (4): eslintConfig, eslint config, eslint config next core web vitals, eslint config next typescript
 
-### Community 11 - "Article Content Loader"
-Cohesion: 0.14
-Nodes (14): ArticleFrontMatter, sources, parseArticle(), content articles 01 codegraph evidence en md raw, content articles 01 codegraph evidence vi md raw, content articles 02 install first project en md raw, content articles 02 install first project vi md raw, content articles 03 connect ai agents en md raw (+6 more)
-
-### Community 9 - "Content and Render Tests"
-Cohesion: 0.13
-Nodes (15): ArticleForValidation, assertSafeMarkdown(), assertArticleParity(), ArticleId, root, required, node assert strict, node fs promises (+7 more)
-
-### Community 17 - "Route Identity Contracts"
-Cohesion: 0.35
-Nodes (9): StaticRouteId, STATIC_ROUTE_PATHS, ARTICLE_ROUTES, articlePath(), pathFor(), resolveLocalizedPath(), alternatePath(), allPublicPaths() (+1 more)
-
-### Community 4 - "Runtime Package Manifest"
+### Community 6 - "Runtime Package Manifest"
 Cohesion: 0.05
 Nodes (36): name, version, private, engines, node, scripts, dev, build (+28 more)
 
-### Community 5 - "Toolchain Dependencies"
+### Community 7 - "Toolchain Dependencies"
 Cohesion: 0.06
 Nodes (33): devDependencies, @cloudflare/vite-plugin, @cloudflare/vite-plugin, @tailwindcss/postcss, @tailwindcss/postcss, @types/node, @types/node, @types/react (+25 more)
 
-### Community 0 - "Spec Kit SDD Workflow"
+### Community 2 - "Spec Kit SDD Workflow"
 Cohesion: 0.05
 Nodes (49): Specification Analysis, Read-Only Analysis, Requirement Coverage Mapping, Analysis Severity Model, Requirements Quality Checklist, Unit Tests for Requirements Writing, Requirement Quality Dimensions, Eighty Percent Traceability Threshold (+41 more)
 
-### Community 2 - "Constitution and Quality"
+### Community 4 - "Constitution and Quality"
 Cohesion: 0.06
 Nodes (40): Constitution Authority, Specification Clarification, Ambiguity Coverage Taxonomy, Sequential Clarification Questioning, Incremental Specification Integration, Constitution Management, Constitution Semantic Versioning, Constitution Consistency Propagation (+32 more)
 
-### Community 1 - "MQL5 Evidence and Release"
+### Community 3 - "MQL5 Evidence and Release"
 Cohesion: 0.05
 Nodes (46): Junet.store V1 release foundation, Immutable feature specs and append-only operational journal, HSTS deferred until apex and www TLS proof, Protected feature release checkpoint, Private Sites candidate validation gate, Production approval DNS and TLS blockers, Previous known-good Sites rollback, MQL5 CodeGraph evidence-backed orientation map (+38 more)
 
@@ -161,24 +121,24 @@ Nodes (46): Junet.store V1 release foundation, Immutable feature specs and appen
 Cohesion: 0.12
 Nodes (19): Junet.store bilingual mobile-first knowledge hub, MQL5 CodeGraph flagship community project, Repository-owned paired Vietnamese and English Markdown, No CMS database forms accounts analytics or third-party scripts, Private vulnerability reporting policy, V1 reduced public application attack surface, MQL5 CodeGraph private advisory channel, Strict Markdown-to-localized-HTML content pipeline (+11 more)
 
-### Community 7 - "Foundation Design Decisions"
-Cohesion: 0.09
-Nodes (25): System-first persisted theme, Parser-blocking theme initializer, Theme CSP constraint, Repository-owned Markdown, Paired bilingual articles, Strict Markdown release gate, Explicit bundled Markdown imports, Code-intelligence baseline (+17 more)
-
-### Community 6 - "Release Security Operations"
+### Community 8 - "Foundation Design Decisions"
 Cohesion: 0.07
-Nodes (33): Sites controlled delivery, Validation-only GitHub Actions, Exact green commit delivery, Explicit production approval, Static-first edge security, Default-deny response policy, Progressive edge mitigation, Append-only security journal (+25 more)
+Nodes (32): System-first persisted theme, Parser-blocking theme initializer, Theme CSP constraint, Repository-owned Markdown, Paired bilingual articles, Strict Markdown release gate, Explicit bundled Markdown imports, Content contract (+24 more)
 
-### Community 3 - "Foundation Release Architecture"
+### Community 9 - "Release Evidence and Intelligence"
+Cohesion: 0.08
+Nodes (27): Sites controlled delivery, Validation-only GitHub Actions, Exact green commit delivery, Explicit production approval, Append-only project journal, Foundation implementation candidate, Mobile and performance release evidence, Code-intelligence baseline (+19 more)
+
+### Community 5 - "Foundation Security Release"
 Cohesion: 0.06
-Nodes (39): Production edge activation, Deployable response policy, Production cache policy, DNS rollback target 198.54.119.178, DNS cutover workflow, Cloudflare DNS and edge backup, TLS and canonical redirect validation, HSTS observation gate (+31 more)
+Nodes (38): Static-first edge security, Default-deny response policy, Progressive edge mitigation, Append-only security journal, Production edge activation, Deployable response policy, Production cache policy, Cloudflare Free plan constraints (+30 more)
 
-### Community 19 - "Sites Vite Configuration"
+### Community 13 - "Sites Vite Configuration"
 Cohesion: 0.29
 Nodes (6): localBindingConfig, build sites vite plugin, build sites vite plugin sites, openai hosting, vinext, vite
 
-### Community 15 - "Worker Asset Policy"
-Cohesion: 0.17
+### Community 11 - "Worker Dynamic Assets"
+Cohesion: 0.14
 Nodes (7): Env, ExecutionContext, PUBLIC_ASSET_PATHS, isStaticAsset(), worker, vinext server app router entry, vinext server image optimization
 
 ## Ambiguous Edges - Review These
@@ -199,10 +159,10 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `PageParams`, `metadata`, `Theme` to the rest of the system?**
   _166 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Article Content Loader` be split into smaller, more focused modules?**
-  _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
-- **Should `Content and Render Tests` be split into smaller, more focused modules?**
-  _Cohesion score 0.13157894736842105 - nodes in this community are weakly interconnected._
+- **Should `Localized Application UI` be split into smaller, more focused modules?**
+  _Cohesion score 0.059125085440874914 - nodes in this community are weakly interconnected._
+- **Should `Content Routes and Tests` be split into smaller, more focused modules?**
+  _Cohesion score 0.06857142857142857 - nodes in this community are weakly interconnected._
 - **Should `Runtime Package Manifest` be split into smaller, more focused modules?**
   _Cohesion score 0.05405405405405406 - nodes in this community are weakly interconnected._
 - **Should `Toolchain Dependencies` be split into smaller, more focused modules?**
@@ -210,8 +170,7 @@ _Questions this graph is uniquely positioned to answer:_
 
 ## Operator Health Review
 
-- Directed incremental hotfix update: 498 nodes, 710 retained edges, and 30 communities.
-- Integrity on the post-merge extraction: 0 missing endpoints, 0 dangling endpoints, 0 self-loops, and 0 exact duplicate edges.
-- Changed-source scope was limited to `vite.config.ts`, `worker/index.ts`, and `tests/rendered-html.test.mjs`; semantic documents were unchanged, so no LLM extraction was required.
-- The prior full-rebuild audit recorded two raw same-endpoint edge pairs before `DiGraph` collapse. This incremental merge starts from that reviewed directed graph and does not represent those pairs as newly resolved.
+- Directed incremental dynamic-asset update: 500 nodes, 712 retained edges, and 22 communities.
+- Integrity: 0 missing endpoints, 0 dangling endpoints, 0 self-loops, and 0 exact duplicate edges.
+- Changed-source scope: `lib/content/projects.ts`, `lib/seo.ts`, `tests/rendered-html.test.mjs`, and `worker/index.ts`; semantic documents were unchanged, so no LLM extraction was required.
 - Token usage remains zero measured because this update was deterministic AST-only work.
