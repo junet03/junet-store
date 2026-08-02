@@ -87,7 +87,7 @@ test("returns localized HTML 404 responses", async () => {
   assert.match(await en.text(), /This page is not on the map/);
 });
 
-test("applies strict response policy without premature HSTS", async () => {
+test("applies strict response and cache policy after production TLS activation", async () => {
   const response = await request("/en");
   const csp = response.headers.get("content-security-policy") ?? "";
   assert.match(csp, /default-src 'self'/);
@@ -97,7 +97,11 @@ test("applies strict response policy without premature HSTS", async () => {
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
   assert.equal(response.headers.get("x-frame-options"), "DENY");
   assert.equal(response.headers.get("referrer-policy"), "no-referrer");
-  assert.equal(response.headers.get("strict-transport-security"), null);
+  assert.equal(response.headers.get("strict-transport-security"), "max-age=2592000");
+  assert.equal(
+    response.headers.get("cache-control"),
+    "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+  );
   assert.equal(response.headers.get("x-powered-by"), null);
 });
 
