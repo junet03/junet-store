@@ -89,7 +89,7 @@
 - [X] T038 Index the canonical repository with GitNexus, run scoped impact/change detection, and journal the summary
 - [X] T039 Create and push the public junet03/junet-store repository, configure protected main checks, and preserve the clean intended history
 - [X] T040 Save and privately deploy the exact validated Sites version, run preview smoke checks, and record rollback data
-- [ ] T041 After explicit approval, publish the saved version, cut over junet.store, apply available Cloudflare protections, and record production smoke/rollback evidence
+- [X] T041 After explicit approval, publish the saved version, cut over junet.store, apply available Cloudflare protections, and record production smoke/rollback evidence
 
 ## Dependencies & Execution Order
 

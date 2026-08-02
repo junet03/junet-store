@@ -22,6 +22,9 @@ rate-limiting rule supports `Block`, not Managed Challenge.
   window while keeping the browser max-age at zero.
 - Cache hashed `/assets/` output immutably for one year; cache stable branded
   WebP assets for one day with a one-week stale window.
+- Emit virtual `/edge-assets/` and `/edge-media/` URLs and proxy only bounded
+  paths through the asset binding. This keeps MIME/cache/HSTS policy inside the
+  versioned Worker when Sites serves physical static files before that Worker.
 - Keep Cloudflare automatic DDoS protection. Do not silently replace the
   planned Managed Challenge with Block before false-positive evidence exists.
 - Preserve the pre-cutover apex value `198.54.119.178` as the DNS rollback
@@ -34,3 +37,9 @@ The production transport and cache policy is reproducible in source and follows
 the versioned Sites artifact. Rate limiting remains an explicit post-launch
 decision: either observe enough traffic to justify Block or upgrade to a plan
 that supports the intended Managed Challenge and managed WAF rules.
+
+Production proof showed that Sites retained its physical static-file fast path
+even with `assets.run_worker_first=true`. Cloudflare cache/response-transform
+experiments did not govern that custom-hostname path and were removed. Virtual
+asset namespaces are therefore the authoritative delivery contract, not an
+unverified dashboard rule.
